@@ -77,7 +77,7 @@
 #     return int(nominator / denominator)
 
 
-def pascal_traingle(n):
+def pascal_triangle(n):
     """
     Get the pascal triangle of a certain power.
 
