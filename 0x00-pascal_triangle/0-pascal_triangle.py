@@ -17,7 +17,7 @@ def pascal_triangle(n):
     Args:
         n (int): the power
     """
-    if n <= 0:
+    if type(n) is not int or n <= 0:
         return []
     res = []
     for i in range(n):
