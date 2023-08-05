@@ -14,7 +14,6 @@ def canUnlockAll(boxes):
         for idx in box:
             if idx_b == idx:
                 continue
-            if idx >= length:
-                return False
-            unlock_box.add(idx)
+            if idx < length:
+                unlock_box.add(idx)
     return len(unlock_box) == length
