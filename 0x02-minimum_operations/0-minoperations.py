@@ -11,7 +11,7 @@ def minOperations(n: int) -> int:
     H = 1
     inc = 1
     opc_count = 1
-    if n > 3 and check_prime(n):
+    if n == 1:
         return 0
     while True:
         if H == n:
