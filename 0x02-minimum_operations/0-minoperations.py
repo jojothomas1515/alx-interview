@@ -4,7 +4,7 @@ Minimum operations
 """
 
 
-def minOperations(n):
+def minOperations(n: int) -> int:
     """
     Min ops.
     """
