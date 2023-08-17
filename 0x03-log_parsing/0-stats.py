@@ -29,34 +29,39 @@ def tokenize(line):
     if len(res) < 2:
         return
     code, size = res
-    if resource == '"GET /projects/260 HTTP/1.1"':
-        check_n_add_status_code(code)
-        add_size(size)
+    if is_ip(ip) and is_date(date) \
+            and resource == '"GET /projects/260 HTTP/1.1"':
+        if check_n_add_status_code(code):
+            add_size(size)
 
 
-# def is_ip(val) -> bool:
-#     """Check if the value is ip format."""
-#     ip_check = re.compile(r"(\d{1,3}).(\d{1,3}).(\d{1,3}).(\d{1,3})")
-#     if ip_check.match(val.strip()):
-#         return True
-#     return False
+def is_ip(val) -> bool:
+    """Check if the value is ip format."""
+    ip_check = re.compile(r"(\d{1,3}).(\d{1,3}).(\d{1,3}).(\d{1,3})")
+    if ip_check.match(val.strip()):
+        return True
+    return False
 
 
-# def is_date(val) -> bool:
-#     """Check pattern."""
-#     pattern = r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\]"
-#     date_check = re.compile(pattern)
-#     if date_check.match(val.strip()):
-#         return True
-#     return False
+def is_date(val) -> bool:
+    """Check pattern."""
+    pattern = r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\]"
+    date_check = re.compile(pattern)
+    if date_check.match(val.strip()):
+        return True
+    return False
 
 
 def check_n_add_status_code(val) -> bool:
     """check status code."""
-    if log_info.get(val):
-        log_info[val] = log_info.get(val) + 1
-    else:
-        log_info[val] = log_info.get(val) + 1
+    status_check = re.compile(r"\d{3}")
+    if status_check:
+        if log_info.get(val):
+            log_info[val] = log_info.get(val) + 1
+        else:
+            log_info[val] = log_info.get(val) + 1
+        return True
+    return False
 
 
 def add_size(val) -> None:
