@@ -89,8 +89,9 @@ def main() -> None:
             i += 1
 
     except KeyboardInterrupt:
-        display()
         sys.exit(0)
+    finally:
+        display()
 
 
 if __name__ == '__main__':
