@@ -89,7 +89,7 @@ def main() -> None:
     signal(SIGINT, sig_handler)
     for line in stdin:
         tokenize(line)
-        if i % 10 == 0:
+        if i % 11 == 0:
             display()
         i += 1
 
