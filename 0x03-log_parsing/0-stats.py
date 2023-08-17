@@ -83,10 +83,10 @@ def main() -> None:
     try:
         for line in stdin:
             tokenize(line)
-            i += 1
-            if i == 10:
+            if i % 10 == 0:
                 i = 0
                 display()
+            i += 1
 
     except KeyboardInterrupt:
         display()
