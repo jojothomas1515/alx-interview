@@ -68,7 +68,9 @@ def display() -> None:
 
     print(f"File size: {log_info.get('file_size')}")
     for i in code_list:
-        print(f"{i}: {log_info.get(str((i))) or 0}")
+        res = log_info.get(str((i)))
+        if res:
+            print(f"{i}: {res}")
 
 
 def main() -> None:
