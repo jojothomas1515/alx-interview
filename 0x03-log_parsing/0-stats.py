@@ -4,13 +4,11 @@ log parsing
 """
 
 from sys import stdin
-from signal import signal, SIGINT
 import re
 import sys
-import time
 
-log_info = {}
-breach = []
+log_info = {"200": 0, "301": 0, "400": 0, "401": 0,
+            "403": 0, "404": 0, "405": 0, "500": 0, "size": 0}
 
 
 def tokenize(line):
@@ -36,42 +34,43 @@ def tokenize(line):
         add_size(size)
 
 
-def is_ip(val) -> bool:
-    """Check if the value is ip format."""
-    ip_check = re.compile(r"(\d{1,3}).(\d{1,3}).(\d{1,3}).(\d{1,3})")
-    if ip_check.match(val.strip()):
-        return True
-    return False
+# def is_ip(val) -> bool:
+#     """Check if the value is ip format."""
+#     ip_check = re.compile(r"(\d{1,3}).(\d{1,3}).(\d{1,3}).(\d{1,3})")
+#     if ip_check.match(val.strip()):
+#         return True
+#     return False
 
 
-def is_date(val) -> bool:
-    """Check pattern."""
-    pattern = r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\]"
-    date_check = re.compile(pattern)
-    if date_check.match(val.strip()):
-        return True
-    return False
+# def is_date(val) -> bool:
+#     """Check pattern."""
+#     pattern = r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\]"
+#     date_check = re.compile(pattern)
+#     if date_check.match(val.strip()):
+#         return True
+#     return False
 
 
 def check_n_add_status_code(val) -> bool:
     """check status code."""
-    acceptable = [200, 301, 400, 401, 403, 404, 405, 500]
-    if int(val) in acceptable:
-        log_info[val] = (log_info.get(val) or 0) + 1
+    if log_info.get(val):
+        log_info[val] = log_info.get(val) + 1
+    else:
+        log_info[val] = log_info.get(val) + 1
 
 
 def add_size(val) -> None:
     """add filesize code."""
-    log_info['file_size'] = (log_info.get('file_size') or 0) + int(val)
+    log_info['size'] = log_info.get('size') + int(val)
 
 
 def display() -> None:
     """display the info"""
-    code_list = [200, 301, 400, 401, 403, 404, 405, 500]
+    code_list = ["200", "301", "400", "401", "403", "404", "405", "500"]
 
-    print(f"File size: {log_info.get('file_size')}")
+    print(f"File size: {log_info.get('size')}")
     for i in code_list:
-        res = log_info.get(str((i)))
+        res = log_info.get(i)
         if res:
             print(f"{i}: {res}")
 
@@ -84,10 +83,14 @@ def main() -> None:
     try:
         for line in stdin:
             tokenize(line)
-            if i % 10 == 0:
-                display()
             i += 1
+            if i == 10:
+                i = 0
+                display()
+
     except KeyboardInterrupt:
+        sys.exit(0)
+    finally:
         display()
 
 
