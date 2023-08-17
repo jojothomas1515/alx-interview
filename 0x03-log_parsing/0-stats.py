@@ -85,7 +85,7 @@ def main() -> None:
     """
     Entry.
     """
-    i = 0
+    i = 1
     signal(SIGINT, sig_handler)
     for line in stdin:
         tokenize(line)
