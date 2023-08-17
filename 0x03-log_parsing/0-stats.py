@@ -83,7 +83,7 @@ def main() -> None:
     try:
         for line in stdin:
             tokenize(line)
-            if i % 10 == 0:
+            if i == 10:
                 i = 0
                 display()
             i += 1
