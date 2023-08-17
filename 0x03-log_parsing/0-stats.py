@@ -4,9 +4,17 @@ log parsing
 """
 
 from sys import stdin
+from signal import signal, SIGINT
 import re
+import sys
 
 log_info = {}
+
+
+def sig_handler(a, b):
+    """handles signal"""
+    display()
+    sys.exit(0)
 
 
 def tokenize(line):
@@ -78,6 +86,7 @@ def main() -> None:
     Entry.
     """
     i = 0
+    signal(SIGINT, sig_handler)
     for line in stdin:
         tokenize(line)
         if i % 10 == 0 and i != 0:
