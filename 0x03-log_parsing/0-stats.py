@@ -7,14 +7,10 @@ from sys import stdin
 from signal import signal, SIGINT
 import re
 import sys
+import time
 
 log_info = {}
-
-
-def sig_handler(a, b):
-    """handles signal"""
-    display()
-    sys.exit(0)
+breach = []
 
 
 def tokenize(line):
@@ -86,12 +82,14 @@ def main() -> None:
     Entry.
     """
     i = 1
-    signal(SIGINT, sig_handler)
-    for line in stdin:
-        tokenize(line)
-        if i % 10 == 0:
-            display()
-        i += 1
+    try:
+        for line in stdin:
+            tokenize(line)
+            if i % 10 == 0:
+                display()
+            i += 1
+    except KeyboardInterrupt:
+        display()
 
 
 if __name__ == '__main__':
