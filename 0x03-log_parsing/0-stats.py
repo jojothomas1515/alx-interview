@@ -90,8 +90,6 @@ def main() -> None:
 
     except KeyboardInterrupt:
         sys.exit(0)
-    finally:
-        display()
 
 
 if __name__ == '__main__':
