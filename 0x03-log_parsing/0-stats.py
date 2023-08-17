@@ -80,7 +80,7 @@ def main() -> None:
     """
     Entry.
     """
-    i = 1
+    i = 0
     try:
         for line in stdin:
             tokenize(line)
