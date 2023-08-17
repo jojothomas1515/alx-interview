@@ -89,6 +89,7 @@ def main() -> None:
                 display()
 
     except KeyboardInterrupt:
+        display()
         sys.exit(0)
 
 
