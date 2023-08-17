@@ -1,0 +1,88 @@
+#!/usr/bin/python3
+"""
+log parsing
+"""
+
+from sys import stdin
+from typing import Tuple, List, Dict
+import re
+
+log_info: Dict = {}
+
+
+def tokenize(line: str) -> Tuple[...]:
+    """Tokenize the line"""
+    res: List[str] = line.split("-", 1)
+    if len(res) < 2:
+        return
+    ip, line = res
+    res = re.split(r"(?<=]) ", line)
+    if len(res) < 2:
+        return
+    date, line = res
+    res = re.split(r'(?<=") ', line)
+    if len(res) < 2:
+        return
+    resource, line = res
+    res = line.split(" ")
+    if len(res) < 2:
+        return
+    code, size = res
+    if is_ip(ip) and is_date(date) \
+            and resource == '"GET /projects/260 HTTP/1.1"':
+        check_n_add_status_code(code)
+        add_size(size)
+
+
+def is_ip(val: str) -> bool:
+    """Check if the value is ip format."""
+    ip_check = re.compile(r"(\d{1,3}).(\d{1,3}).(\d{1,3}).(\d{1,3})")
+    if ip_check.match(val.strip()):
+        return True
+    return False
+
+
+def is_date(val: str) -> bool:
+    """Check pattern."""
+    pattern = r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\]"
+    date_check = re.compile(pattern)
+    if date_check.match(val.strip()):
+        return True
+    return False
+
+
+def check_n_add_status_code(val: str) -> bool:
+    """check status code."""
+    acceptable: List[int] = [200, 301, 400, 401, 403, 404, 405, 500]
+    if int(val) in acceptable:
+        log_info[val] = (log_info.get(val) or 0) + 1
+
+
+def add_size(val: str) -> None:
+    """add filesize code."""
+    log_info['file_size'] = (log_info.get('file_size') or 0) + int(val)
+
+
+def display() -> None:
+    """display the info"""
+    code_list: List[int] = [200, 301, 400, 401, 403, 404, 405, 500]
+
+    print(f"File size: {log_info.get('file_size')}")
+    for i in code_list:
+        print(f"{i}: {log_info.get(str((i))) or 0}")
+
+
+def main() -> None:
+    """
+    Entry.
+    """
+    i: int = 0
+    for line in stdin:
+        tokenize(line)
+        i += 1
+        if i % 10 == 0:
+            display()
+
+
+if __name__ == '__main__':
+    main()
