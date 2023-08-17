@@ -78,9 +78,9 @@ def main() -> None:
     i = 0
     for line in stdin:
         tokenize(line)
-        i += 1
         if i % 10 == 0:
             display()
+        i += 1
 
 
 if __name__ == '__main__':
