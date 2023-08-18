@@ -29,8 +29,7 @@ def tokenize(line):
     if len(res) < 2:
         return
     code, size = res
-    if is_date(date) \
-            and resource == '"GET /projects/260 HTTP/1.1"':
+    if resource == '"GET /projects/260 HTTP/1.1"':
         if check_n_add_status_code(code):
             add_size(size)
 
@@ -54,8 +53,8 @@ def is_date(val) -> bool:
 
 def check_n_add_status_code(val) -> bool:
     """check status code."""
-    status_check = re.compile(r"\d{3}")
-    if status_check.match(val):
+    # status_check = re.compile(r"\d{3}")
+    if True:
         if log_info.get(val):
             log_info[val] = log_info.get(val) + 1
         else:
