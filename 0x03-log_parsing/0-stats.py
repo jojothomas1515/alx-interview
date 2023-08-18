@@ -55,7 +55,7 @@ def is_date(val) -> bool:
 def check_n_add_status_code(val) -> bool:
     """check status code."""
     status_check = re.compile(r"\d{3}")
-    if status_check:
+    if status_check.match(val):
         if log_info.get(val):
             log_info[val] = log_info.get(val) + 1
         else:
