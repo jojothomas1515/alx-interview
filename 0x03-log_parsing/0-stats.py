@@ -59,7 +59,7 @@ def check_n_add_status_code(val) -> bool:
         if log_info.get(val):
             log_info[val] = log_info.get(val) + 1
         else:
-            log_info[val] = log_info.get(val) + 1
+            log_info[val] = 1
         return True
     return False
 
