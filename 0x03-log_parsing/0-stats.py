@@ -29,7 +29,7 @@ def tokenize(line):
     if len(res) < 2:
         return
     code, size = res
-    if is_ip(ip) and is_date(date) \
+    if is_date(date) \
             and resource == '"GET /projects/260 HTTP/1.1"':
         if check_n_add_status_code(code):
             add_size(size)
