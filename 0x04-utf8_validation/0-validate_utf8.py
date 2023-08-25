@@ -10,7 +10,9 @@ def validUTF8(data) -> bool:
         if not n_byte:
             if _byte > 255:
                 _byte = _byte & 255
-            n_byte, _ = bom_or_cont(_byte)
+            n_byte, _c = bom_or_cont(_byte)
+            if _c:
+                return False
         else:
             _, _cont = bom_or_cont(_byte)
             if n_byte and _cont:
