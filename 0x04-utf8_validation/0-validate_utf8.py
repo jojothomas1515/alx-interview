@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """utf-8 validator."""
+from typing import Tuple, List
 
 
-def validUTF8(data) -> bool:
+def validUTF8(data: List[int]) -> bool:
     """Check if bytes list is a valid utf-8."""
     _cont: int = 0
     n_byte: int = 0
@@ -24,7 +25,7 @@ def validUTF8(data) -> bool:
     return True
 
 
-def bom_or_cont(_byte):
+def bom_or_cont(_byte: int) -> Tuple[int, int]:
     """Check if it a byte order."""
     _bom = 0b10000000
     _7bit = 0b01000000
