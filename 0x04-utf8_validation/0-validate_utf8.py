@@ -19,6 +19,8 @@ def validUTF8(data) -> bool:
                 n_byte -= 1
             elif n_byte and not _cont:
                 return False
+    if n_byte:
+        return False
     return True
 
 
