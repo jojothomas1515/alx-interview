@@ -4,10 +4,14 @@
 from typing import Tuple, List
 
 
-def validUTF8(data: List[int]) -> bool:
-    """Check if bytes list is a valid utf-8."""
-    _cont: int = 0
-    n_byte: int = 0
+def validUTF8(data):
+    """Check if bytes list is a valid utf-8.
+    Args:
+    data: list of bytes that is suppose to be unicode
+    Returns: True or false
+    """
+    _cont = 0
+    n_byte = 0
     for _byte in data:
         if not n_byte:
             if _byte > 255:
@@ -26,14 +30,18 @@ def validUTF8(data: List[int]) -> bool:
     return True
 
 
-def bom_or_cont(_byte: int) -> Tuple[int, int]:
-    """Check if it a byte order."""
-    _bom: int = 0b10000000
-    _7bit: int = 0b01000000
-    _6bit: int = 0b00100000
-    _5bit: int = 0b00010000
-    _cont: int = 0
-    n_byte: int = 0
+def bom_or_cont(_byte) -> Tuple[int, int]:
+    """Check if it a byte order.
+    Args:
+    byte: the byte to check
+    Return: Tuple of n_byte and cont
+    """
+    _bom = 0b10000000
+    _7bit = 0b01000000
+    _6bit = 0b00100000
+    _5bit = 0b00010000
+    _cont = 0
+    n_byte = 0
     if _byte & _bom:
         if _byte & _7bit:
             n_byte += 1
