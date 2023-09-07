@@ -6,8 +6,8 @@ const request = require('request');
  *
  * @param {number} id
  */
-function getStarWarsFilmCharacters (id) {
-  request.get(
+async function getStarWarsFilmCharacters(id) {
+  await request.get(
     `https://swapi-api.alx-tools.com/api/films/${id}/`,
     (_, res, body) => {
       if (res.statusCode === 200) {
@@ -23,8 +23,8 @@ function getStarWarsFilmCharacters (id) {
  * ### Get the actor name from the result gotten by the request
  * @param {string} url of the infomation
  */
-function actorNAme (url) {
-  request.get(url, (_, res, body) => {
+async function actorNAme(url) {
+  await request.get(url, (_, res, body) => {
     if (res.statusCode === 200) {
       console.log(JSON.parse(body).name);
     }
