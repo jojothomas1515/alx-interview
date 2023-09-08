@@ -6,7 +6,7 @@ const request = require('request');
  *
  * @param {number} id
  */
-function getStarWarsFilmCharacters(id) {
+function getStarWarsFilmCharacters (id) {
   request.get(
     `https://swapi-api.alx-tools.com/api/films/${id}/`,
     (_, res, body) => {
