@@ -17,7 +17,7 @@ async function getStarWarsFilmCharacters(id) {
             headers: 'Content-type: application/json'
           }, (_, res, body) => {
             if (res.statusCode === 200) {
-              console.log(body.name);
+              console.log(JSON.parse(body).name);
             }
           });
         }
