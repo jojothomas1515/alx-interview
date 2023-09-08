@@ -6,7 +6,7 @@ const request = require('request');
  *
  * @param {number} id
  */
-function getStarWarsFilmCharacters (id) {
+function getStarWarsFilmCharacters(id) {
   request.get(
     `https://swapi-api.alx-tools.com/api/films/${id}/`,
     (_, res, body) => {
@@ -14,7 +14,7 @@ function getStarWarsFilmCharacters (id) {
         const result = JSON.parse(body);
         const cName = result.characters.map((url) =>
           new Promise((resolve, reject) => {
-            request.get(url, (err, res, body) => {
+            request.get(url, (err, resp, body) => {
               if (err) {
                 reject(err);
               }
@@ -23,7 +23,7 @@ function getStarWarsFilmCharacters (id) {
           })
         );
         Promise.all(cName)
-          .then(res => console.log(res));
+          .then(ressp => ressp.forEach(name => console.log(name)));
       }
     }
   );
