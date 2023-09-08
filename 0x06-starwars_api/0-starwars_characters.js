@@ -6,7 +6,7 @@ const request = require('request');
  *
  * @param {number} id
  */
-async function getStarWarsFilmCharacters (id) {
+async function getStarWarsFilmCharacters(id) {
   request.get(
     `https://swapi-api.alx-tools.com/api/films/${id}/`,
     (_, res, body) => {
@@ -17,7 +17,7 @@ async function getStarWarsFilmCharacters (id) {
             headers: 'Content-type: application/json'
           }, (_, res, body) => {
             if (res.statusCode === 200) {
-              console.log(JSON.parse(body).name);
+              console.log(body.name);
             }
           });
         }
