@@ -6,21 +6,24 @@ const request = require('request');
  *
  * @param {number} id
  */
-async function getStarWarsFilmCharacters(id) {
+function getStarWarsFilmCharacters (id) {
   request.get(
     `https://swapi-api.alx-tools.com/api/films/${id}/`,
     (_, res, body) => {
       if (res.statusCode === 200) {
         const result = JSON.parse(body);
-        for (const actor of result.characters) {
-          request.get(actor, {
-            headers: 'Content-type: application/json'
-          }, (_, res, body) => {
-            if (res.statusCode === 200) {
-              console.log(JSON.parse(body).name);
-            }
-          });
-        }
+        const cName = result.characters.map((url) =>
+          new Promise((resolve, reject) => {
+            request.get(url, (err, res, body) => {
+              if (err) {
+                reject(err);
+              }
+              resolve(JSON.parse(body).name);
+            });
+          })
+        );
+        Promise.all(cName)
+          .then(res => console.log(res));
       }
     }
   );
