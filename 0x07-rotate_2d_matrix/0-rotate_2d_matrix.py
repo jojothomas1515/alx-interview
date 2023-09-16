@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 """Rotate matrix."""
 
-from typing import List
 
-
-def rotate_2d_matrix(matrix: List[List[int]]):
+def rotate_2d_matrix(matrix):
     """Rotate 2d matrix."""
-    size: int = len(matrix)
+    size = len(matrix)
 
     new_matrix = [[0 for _ in range(size)] for _ in range(size)]
 
