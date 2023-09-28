@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Interview question solution for island perimeter."""
+
 
 def island_perimeter(grid):
     """Calculate the island representing grid.
