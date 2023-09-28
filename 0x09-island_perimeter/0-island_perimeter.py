@@ -4,7 +4,7 @@
 
 def check_perimeter(grid, i, j):
     """ island perimeter helper function. """
-    res: int = 0
+    res = 0
     try:
         if i == 0 or not grid[i-1][j]:
             res += 1
@@ -38,7 +38,7 @@ def island_perimeter(grid):
         grid: NxN matrix.
     Returns: the perimeter
     """
-    res: int = 0
+    res = 0
     for idx, val in enumerate(grid):
         for j, vl in enumerate(val):
             if vl == 1:
