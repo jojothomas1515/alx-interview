@@ -2,6 +2,35 @@
 """Interview question solution for island perimeter."""
 
 
+def check_perimeter(grid, i, j):
+    """ island perimeter helper function. """
+    res: int = 0
+    try:
+        if i == 0 or not grid[i-1][j]:
+            res += 1
+    except Exception as e:
+        res += 1
+    try:
+        if not grid[i+1][j] or i == len(grid) - 1:
+            res += 1
+    except Exception as e:
+        res += 1
+
+    try:
+        if not grid[i][j+1] or j == len(grid[i]) - 1:
+            res += 1
+    except Exception as e:
+        res += 1
+
+    try:
+        if not grid[i][j - 1] or j == 0:
+            res += 1
+    except Exception as e:
+        res += 1
+
+    return res
+
+
 def island_perimeter(grid):
     """Calculate the island representing grid.
 
@@ -9,32 +38,9 @@ def island_perimeter(grid):
         grid: NxN matrix.
     Returns: the perimeter
     """
-    count = 0
-    col_len = len(grid)
-
-    for i, row in enumerate(grid):
-        row_len = len(row)
-        for j, v in enumerate(row):
-            cc = 0
-            if v == 1:
-
-                if not ((j + 1) >= row_len):
-                    if grid[i][j + 1] == 0:
-                        count += 1
-                        cc += 1
-                if not ((j - 1) < 0):
-                    if grid[i][j - 1] == 0:
-                        count += 1
-                        cc += 1
-                if not ((i + 1) >= col_len):
-                    if grid[i + 1][j] == 0:
-                        count += 1
-                        cc += 1
-                if not ((i - 1) < 0):
-                    if grid[i - 1][j] == 0:
-                        count += 1
-                        cc += 1
-                if cc == 4:
-                    return 0
-
-    return count
+    res: int = 0
+    for idx, val in enumerate(grid):
+        for j, vl in enumerate(val):
+            if vl == 1:
+                res += check_perimeter(grid, idx, j)
+    return res
