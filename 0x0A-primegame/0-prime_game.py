@@ -13,8 +13,7 @@ def isWinner(x, nums):
 
     for i in range(x):
         size = nums[i]
-        if size == 1:
-            break
+
         p_list = [j + 1 for j in range(size)]
 
         turn = 1
@@ -43,7 +42,7 @@ def isWinner(x, nums):
             break
 
     if winner["Ben"] > winner["Maria"]:
-        return "Ben"
+        return "Maria"
     return "Maria"
 
 
