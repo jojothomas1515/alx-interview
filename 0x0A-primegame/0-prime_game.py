@@ -11,6 +11,9 @@ def isWinner(x, nums):
 
     winner = {"Maria": 0, "Ben": 0}
 
+    if x == 0 or x < len(nums):
+        return None
+
     for i in range(x):
         size = nums[i]
         if size == 1:
